@@ -13,7 +13,7 @@ import org.keycloak.saml.validators.DestinationValidator;
  */
 public class EauthIdentityProviderFactory extends SAMLIdentityProviderFactory {
 
-    public static final String PROVIDER_ID = "eauth";
+    public static final String PROVIDER_ID = "eauth-saml";
 
     private DestinationValidator destinationValidator;
 

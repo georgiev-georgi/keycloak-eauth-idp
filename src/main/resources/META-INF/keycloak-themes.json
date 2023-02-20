@@ -1,7 +1,7 @@
 {
   "themes": [
     {
-      "name": "eauth-theme",
+      "name": "eauth-saml-theme",
       "types": [
         "admin"
       ]
