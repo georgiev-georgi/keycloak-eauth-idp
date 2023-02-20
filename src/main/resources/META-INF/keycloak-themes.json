@@ -1,0 +1,10 @@
+{
+  "themes": [
+    {
+      "name": "eauth-theme",
+      "types": [
+        "admin"
+      ]
+    }
+  ]
+}
