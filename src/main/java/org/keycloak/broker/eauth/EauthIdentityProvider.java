@@ -5,6 +5,7 @@ import org.keycloak.broker.provider.IdentityBrokerException;
 import org.keycloak.broker.saml.SAMLIdentityProvider;
 import org.keycloak.broker.saml.SAMLIdentityProviderConfig;
 import org.keycloak.dom.saml.v2.protocol.AuthnRequestType;
+import org.keycloak.events.EventBuilder;
 import org.keycloak.models.KeyManager;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
@@ -35,8 +36,10 @@ import java.util.List;
  * Time: 15:11
  */
 public class EauthIdentityProvider extends SAMLIdentityProvider {
+    private DestinationValidator destinationValidator;
     public EauthIdentityProvider(KeycloakSession session, SAMLIdentityProviderConfig config, DestinationValidator destinationValidator) {
         super(session, config, destinationValidator);
+        this.destinationValidator = destinationValidator;
     }
 
     public Response performLogin(AuthenticationRequest request) {
@@ -78,18 +81,15 @@ public class EauthIdentityProvider extends SAMLIdentityProvider {
             SAML2AuthnRequestBuilder authnRequestBuilder = new SAML2AuthnRequestBuilder()
                     .assertionConsumerUrl(assertionConsumerServiceUrl)
                     .destination(destinationUrl)
-//                    .issuer(issuerURL)
-                    .issuer("http://94.155.141.112:9994/descriptor.xml")//TODO:Hardcoded. Da se fixne funkciqta getEntityId() da vry6ta https://nacidportal/realms/master/broker/eauth-saml/endpoint/descriptor
+                    .issuer(issuerURL)
                     .forceAuthn(getConfig().isForceAuthn())
                     .protocolBinding(protocolBinding)
-                    .nameIdPolicy(SAML2NameIDPolicyBuilder
-                            .format(nameIDPolicyFormat)
-                            .setAllowCreate(allowCreate))
+                    .nameIdPolicy(SAML2NameIDPolicyBuilder.format(nameIDPolicyFormat).setAllowCreate(allowCreate))
                     .attributeConsumingServiceIndex(attributeConsumingServiceIndex)
                     .requestedAuthnContext(requestedAuthnContext)
                     .subject(loginHint)
-                    .addExtension(new RequestedServiceGenerator())
-                    .addExtension(new RequestedAttributesGenerator());
+                    .addExtension(new RequestedServiceGenerator((EauthIdentityProviderConfig) getConfig()))
+                    .addExtension(new RequestedAttributesGenerator((EauthIdentityProviderConfig) getConfig()));
 
 
             JaxrsSAML2BindingBuilder binding = new JaxrsSAML2BindingBuilder(session)
@@ -119,12 +119,13 @@ public class EauthIdentityProvider extends SAMLIdentityProvider {
 
             // Save the current RequestID in the Auth Session as we need to verify it against the ID returned from the IdP
             request.getAuthenticationSession().setClientNote(SamlProtocol.SAML_REQUEST_ID_BROKER, authnRequest.getID());
-
+            Response res;
             if (postBinding) {
-                return binding.postBinding(authnRequestBuilder.toDocument()).request(destinationUrl);
+                res = binding.postBinding(authnRequestBuilder.toDocument()).request(destinationUrl);
             } else {
-                return binding.redirectBinding(authnRequestBuilder.toDocument()).request(destinationUrl);
+                res = binding.redirectBinding(authnRequestBuilder.toDocument()).request(destinationUrl);
             }
+            return res;
         } catch (Exception e) {
             throw new IdentityBrokerException("Could not create authentication request.", e);
         }

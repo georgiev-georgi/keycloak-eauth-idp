@@ -11,13 +11,17 @@ import javax.xml.stream.XMLStreamWriter;
  * Time: 17:14
  */
 public class RequestedServiceGenerator  extends AbstractExtensionGenerator {
+    public RequestedServiceGenerator(EauthIdentityProviderConfig config) {
+        super(config);
+    }
+
     @Override
     public void write(XMLStreamWriter writer) throws ProcessingException {
         StaxUtil.writeStartElement(writer, PREFIX, "RequestedService", NAMESPACE);
         StaxUtil.writeNameSpace(writer, PREFIX, NAMESPACE);
-        addElement(writer, "Service", "2.16.100.1.1.24.1.5.1.1.1");//TODO:Trqbva da moje da se konfigurira!!!!
-        addElement(writer, "Provider", "2.16.100.1.1.24.1.5");//TODO:Trqbva da moje da se konfigurira!!!!
-        addElement(writer, "LevelOfAssurance", "HIGH");//TODO:Trqbva da moje da se konfigurira!!!!
+        addElement(writer, "Service", config.getRequestedServiceService());
+        addElement(writer, "Provider", config.getRequestedServiceProvider());
+        addElement(writer, "LevelOfAssurance", config.getRequestedServiceLevelOfAssurance());
         StaxUtil.writeEndElement(writer);
         StaxUtil.flush(writer);
     }

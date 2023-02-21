@@ -14,6 +14,10 @@ import javax.xml.stream.XMLStreamWriter;
 public abstract class AbstractExtensionGenerator implements SamlProtocolExtensionsAwareBuilder.NodeGenerator {
     protected static String PREFIX = "egovbga";
     protected static String NAMESPACE = "urn:bg:egov:eauth:2.0:saml:ext";
+    protected EauthIdentityProviderConfig config;
+    public AbstractExtensionGenerator(EauthIdentityProviderConfig config) {
+        this.config = config;
+    }
 
     protected void addElement(XMLStreamWriter writer, String key, String value) throws ProcessingException {
         StaxUtil.writeStartElement(writer, PREFIX, key, NAMESPACE);
