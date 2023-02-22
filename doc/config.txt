@@ -1,0 +1,14 @@
+Конфигурация
+- трябва да се деплойне keycloak-eauth-saml-idp като се сложи в providers директорията на keycloak-a и се викне kc build. 
+- в Realm Settings -> themes -> admin console theme трябва да се избере eauth-saml-theme
+- identity providers -> add provider -> eauth saml. Създава се конфигурацията от eauth-saml-config.png
+	- default-ната конфигурация за Service Provider Entity ID е https://nacidportal/auth/realms/master/broker/eauth-saml/endpoint/descriptor, Но съм я променил на http://94.155.141.112:9994/auth/realms/master/broker/eauth-saml/endpoint/descriptor
+	тъй като това урл трябва да е достъпно отвън, защото eauth.egov.bg го call-ват за да прочетат service descriptor-a. В случая първото nacidportal/auth се вижда отвън с 94.155.141.112:9994/auth
+	- тъй като в response-a от eauth няма нищо много уникално, слагам email-a като principal. За целта PrincipalType = Attribute[Name], a principal attribute е urn:egov:bg:eauth:2.0:attributes:email
+- identity provider -> mappers. Има 4 mappers
+	- email-mapper - той прочита стойността от атрибута urn:egov:bg:eauth:2.0:attributes:email и я записва в email attribute-a на потребителя - email-mapper.png
+	- username-attribute-mapper - взема principal-a (който реално е username-a) и проверява дали в базата има потребител с този мейл. Ако има, му взема username-a и го слага в username attribute-a. Ако няма, взема всичко преди @ и го слага като username - username-attribute-mapper.png
+	- eauth-person-names-mapper - прочита urn:egov:bg:eauth:2.0:attributes:personName атрибута от response-a от eauth.egov.bg split-ва го на части и слага всяка една част във атрибути firstName / secondName / lastName. Ако името не се split-не точно на 3 части, слага всичко във firstName - person-names-mapper.png
+	- Прочита атрибута urn:egov:bg:eauth:2.0:attributes:personIdentifier и ако започва с PNOBG- слага стойността след PNOBG- като personId атрибут, и NATIONAL_ID като personIdType - person-identifier-mapper.png
+	
+- Authentication -> First Broker Login -> Review Profile -> Actions - Config -> "Update Profile on First Login" - сложил съм го на on, което ще рече че при първоначално логване с даден подпис, винаги се отваря формата за Update Account Information, независимо дали потребителя съществува или не...
