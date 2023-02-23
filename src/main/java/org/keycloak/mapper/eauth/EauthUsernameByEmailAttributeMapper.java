@@ -4,6 +4,8 @@ import org.keycloak.broker.provider.BrokeredIdentityContext;
 import org.keycloak.models.IdentityProviderMapperModel;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
+import org.keycloak.models.UserModel;
+import org.keycloak.models.utils.KeycloakModelUtils;
 
 import java.util.List;
 
@@ -12,22 +14,18 @@ import java.util.List;
  * Date: 22.02.2023
  * Time: 15:28
  */
-public class EauthIdentifierAttributeMapper extends EauthBaseAttributeMapper {
-    private static final String IDENTIFIER_ATTRIBUTE = "personalId";
-    private static final String IDENTIFIER_TYPE_ATTRIBUTE = "personalIdType";
-
-    public EauthIdentifierAttributeMapper() {
+public class EauthUsernameByEmailAttributeMapper extends EauthBaseAttributeMapper {
+    public EauthUsernameByEmailAttributeMapper() {
         addAllButUserAttributeProperty();
     }
 
     @Override
-    public String getDisplayType() {
-        return "Eauth Person Identifier and Type Mapper";
-    }
-
-    @Override
     public String getId() {
-        return "eauth-person-identifier-attribute-mapper";
+        return "eauth-username-by-email-attribute-mapper";
+    }
+    @Override
+    public String getDisplayType() {
+        return "Eauth Read Username by Email Mapper";
     }
 
     @Override
@@ -36,13 +34,13 @@ public class EauthIdentifierAttributeMapper extends EauthBaseAttributeMapper {
 
         List<String> attributeValuesInContext = findAttributeValuesInContext(attributeName, context);
         if (!attributeValuesInContext.isEmpty()) {
-            String id = attributeValuesInContext.get(0);
-            if (id != null && id.startsWith("PNOBG-")) {
-                String identifier = id.replace("PNOBG-", "");
-                context.setUserAttribute(IDENTIFIER_ATTRIBUTE, toList(identifier));
-                context.setUserAttribute(IDENTIFIER_TYPE_ATTRIBUTE, toList("NATIONAL_ID"));
+            String email = attributeValuesInContext.get(0);
+            UserModel user = KeycloakModelUtils.findUserByNameOrEmail(session, realm, email);
+            if (user != null) {
+                context.setUsername(user.getUsername());
+            } else {
+                context.setUsername(email.split("@")[0]);
             }
         }
     }
-
 }

@@ -1,5 +1,5 @@
 org.keycloak.mapper.eauth.EauthUserAttributeMapper
-org.keycloak.mapper.eauth.EauthUsernameAttributeMapper
+org.keycloak.mapper.eauth.EauthUsernameByEmailAttributeMapper
 org.keycloak.mapper.eauth.EauthPersonNamesAttributeMapper
 org.keycloak.mapper.eauth.EauthIdentifierAttributeMapper
 # org.keycloak.broker.saml.mappers.XPathAttributeMapper
