@@ -12,13 +12,15 @@
 
 ### Инсталиране
 #### keycloak-eauth-idp
- - сваляне на кода от github -> TODO:URL
+ - клониране на github repo -> https://github.com/georgiev-georgi/keycloak-eauth-idp
+ - checkout на branch 21.0.0
  - кода се компилира с java 8 (или по-нова) и maven. 
  - извиква се mvn clean install, което генерира keycloak-eauth-idp.jar file, който се намира в target директорията
  - jar file-a се копира в providers директорията на keycloak
  - извиква се kc build от bin директорията на keycloak
 #### keycloak-ui
- - сваляне на кода от github -> TODO:URL
+ - клониране на github repo -> https://github.com/georgiev-georgi/keycloak-ui
+ - checkout на branch 21.0.0
  - влизане в директорията keycloak-theme
  - mvn clean install, което създава keycloak-admin-ui-21.0.0.jar в target директорията
  - jar-a се преименува на org.keycloak.keycloak-admin-ui-21.0.0.jar и се прехвърля в lib/lib/main директорията на keycloak, в която трябва да съществува същия файл, който се replace-ва
