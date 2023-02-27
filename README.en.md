@@ -31,7 +31,7 @@ The extension uses SAML 2.0 identity provider-a за keycloak and adds additiona
  - eAuth SAML <img src="doc/1.new-identity-provider.png">
  - add eAuth SAML, save <img src="doc/2.eauth-saml-add.png">
  - General Settings <img src="doc/3.eauth-edit-general-settings.png">
- - SAML Settings
+ - SAML Settings <img src="doc/4.eauth-edit-saml-settings.png">
    - Service Provider Entity ID - The URL of the client's service descriptor, usually https://{keycloak.URL}/auth/realms/{REALM.NAME}/broker/eauth-saml/endpoint/descriptor
    - Single Sign On Service URL 
      - https://eauth-test.egov.bg/SingleSignOnService for the test environment
