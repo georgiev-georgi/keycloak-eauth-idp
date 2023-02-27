@@ -50,6 +50,18 @@
      Пример:
      FriendlyName=email;Name=urn:egov:bg:eauth:2.0:attributes:email;NameFormat=urn:oasis:names:tc:saml2:2.0:attrname-format:uri;isRequired=true;value=urn:egov:bg:eauth:2.0:attributes:email
      FriendlyName=placeOfBirth;Name=urn:egov:bg:eauth:2.0:attributes:placeOfBirth;NameFormat=urn:oasis:names:tc:saml2:2.0:attrname-format:uri;isRequired=true;value=urn:egov:bg:eauth:2.0:attributes:placeOfBirth
+     - Списък с допълнителни атрибути
+        - urn:egov:bg:eauth:2.0:attributes:personIdentifier
+        - urn:egov:bg:eauth:2.0:attributes:personName
+        - urn:egov:bg:eauth:2.0:attributes:email
+        - urn:egov:bg:eauth:2.0:attributes:phone
+        - urn:egov:bg:eauth:2.0:attributes:latinName
+        - urn:egov:bg:eauth:2.0:attributes:birthName
+        - urn:egov:bg:eauth:2.0:attributes:dateOfBirth
+        - urn:egov:bg:eauth:2.0:attributes:gender
+        - urn:egov:bg:eauth:2.0:attributes:placeOfBirth
+        - urn:egov:bg:eauth:2.0:attributes:X509
+        - urn:egov:bg:eauth:2.0:attributes:canonicalResidenceAddress
 ### Добаяне и конфигуриране на mappers (при необходимост)
  - Email Mapper - Map-ва email-a от eauth като email person attribute <img src="doc/eauth-email-mapper.png">
    - Mapper Type - Attribute Importer
