@@ -19,12 +19,16 @@
  - jar file-a се копира в providers директорията на keycloak
  - извиква се kc build от bin директорията на keycloak
 #### keycloak-ui
- - клониране на github repo -> https://github.com/georgiev-georgi/keycloak-ui
- - checkout на branch 21.0.0
- - влизане в директорията keycloak-theme
- - mvn clean install, което създава keycloak-admin-ui-21.0.0.jar в target директорията
- - jar-a се преименува на org.keycloak.keycloak-admin-ui-21.0.0.jar и се прехвърля в lib/lib/main директорията на keycloak, в която трябва да съществува същия файл, който се replace-ва
- - стартиране на сървъра
+1. build от sources или използване на съществуващия jar от директорията /jar
+   - build на сорсовете
+     - клониране на github repo -> https://github.com/georgiev-georgi/keycloak-ui
+     - checkout на branch 21.0.0
+     - влизане в директорията keycloak-theme
+     - mvn clean install, което създава keycloak-admin-ui-21.0.0.jar в target директорията
+     - jar-a се преименува на org.keycloak.keycloak-admin-ui-21.0.0.jar
+   - използване на файла org.keycloak.keycloak-admin-ui-21.0.0.jar от /jar директорията
+2. jar file-a се прехвърля в lib/lib/main директорията на keycloak, в която трябва да съществува същия файл, който се replace-ва 
+3. стартиране на сървъра
 
 ### Добавяне и конфигуриране на eAuth SAML idp
  - от менюто в ляво се избира Identity Providers

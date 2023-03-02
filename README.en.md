@@ -19,13 +19,16 @@ The extension uses SAML 2.0 identity provider-a за keycloak and adds additiona
  - the jar file should be copied to the keycloak's providers folder
  - call kc build inside the keycloak's bin dir
 #### keycloak-ui
- - clone github repository -> https://github.com/georgiev-georgi/keycloak-ui
- - checkout branch 21.0.0
- - locate the folder keycloak-theme
- - call mvn clean install, which will create keycloak-admin-ui-21.0.0.jar inside the target folder.
- - rename the jar file to org.keycloak.keycloak-admin-ui-21.0.0.jar and replace the file with the same name inside lib/lib/main folder of keycloak
- - run the keycloak server
-
+1. build the keycloak-ui from sources or use the provided jar inside the /jar folder
+   -  build from sources
+      - clone github repository -> https://github.com/georgiev-georgi/keycloak-ui
+      - checkout branch 21.0.0
+      - locate the folder keycloak-theme
+      - call mvn clean install, which will create keycloak-admin-ui-21.0.0.jar inside the target folder.
+      - rename the jar file to org.keycloak.keycloak-admin-ui-21.0.0.jar 
+   - use the jar file org.keycloak.keycloak-admin-ui-21.0.0.jar inside the /jar folder 
+2. replace the file with the same name inside lib/lib/main folder of keycloak
+3. run the keycloak server
 ### Add and configure the  eAuth SAML idp
  - select Identity Providers
  - eAuth SAML <img src="doc/1.new-identity-provider.png">
