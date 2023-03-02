@@ -15,7 +15,7 @@ The extension uses SAML 2.0 identity provider-a за keycloak and adds additiona
  - clone github repository -> https://github.com/georgiev-georgi/keycloak-eauth-idp
  - checkout branch 21.0.0
  - the code is getting compiled using java 8 (or newer) and maven. 
- - calling mvn clean install will generate keycloak-eauth-idp.jar file, located in the  target directory
+ - calling mvn clean install will generate keycloak-eauth-saml-idp.jar file, located in the  target directory
  - the jar file should be copied to the keycloak's providers folder
  - call kc build inside the keycloak's bin dir
 #### keycloak-ui
@@ -82,3 +82,12 @@ The extension uses SAML 2.0 identity provider-a за keycloak and adds additiona
    - Mapper Type - Eauth Person Names Attributes Mapper
    - Attribute Name - urn:egov:bg:eauth:2.0:attributes:personName
    - Name Format - ATTRIBUTE_FORMAT_URI
+### Changing the authentication flow (if necessary)
+The default authentication flow opens a page with username / email / person names after redirecting from the eAuth page. These fields might be edited.
+After the form submission, the standard flow checks if the user with the give mail exists. If the user does not exist, it's getting created,
+otherwise, the user should authenticate himself with it's password. Then the eAuth user and the keycloak user are getting linked. 
+In our case, we don't need user creation, just linking the users between eAuth and keycloak, so the default Authentication flow is changed and it contains
+only on step - Username Password form for Identity provider authentication  <img src="doc/8.eauth-authentication-flow.png">
+This flow should be linked to the eauth saml identity provider - in the edit page of the Identity provider, the flow should be selected from "First login flow" option
+Now when eAuth redirects to the keycloak server, the user authentication page is shown  <img src="doc/9.user-authentication.png">
+Afterwords the eAuth user is getting linked to the keycloak user.

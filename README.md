@@ -15,7 +15,7 @@
  - клониране на github repo -> https://github.com/georgiev-georgi/keycloak-eauth-idp
  - checkout на branch 21.0.0
  - кода се компилира с java 8 (или по-нова) и maven. 
- - извиква се mvn clean install, което генерира keycloak-eauth-idp.jar file, който се намира в target директорията
+ - извиква се mvn clean install, което генерира keycloak-eauth-saml-idp.jar file, който се намира в target директорията
  - jar file-a се копира в providers директорията на keycloak
  - извиква се kc build от bin директорията на keycloak
 #### keycloak-ui
@@ -82,3 +82,9 @@
    - Mapper Type - Eauth Person Names Attributes Mapper
    - Attribute Name - urn:egov:bg:eauth:2.0:attributes:personName
    - Name Format - ATTRIBUTE_FORMAT_URI
+### Промяна на authentication flow (при необходимост)
+Authentication flow-a по подразбиране първо отваря страница за редактиране на потребителско име / mail / имена на потребител, попълнени с данни получени от eAuth, които могат да се коригират, 
+след което или създава нов потребител с въведените данни и го връзва към подписа или връзва съществуващ потребител с въведения мейл / username, като кара потребителя да се аутентикира с паролата си.
+В нашия конкретен случай ние не искаме да се създава потребител, ако той не съществува, а директно да се върже към съществуващ, е създаден следния Authentication flow-a <img src="doc/8.eauth-authentication-flow.png">
+След което този flow е вързан към eauth saml identity provider-a - В редакцията му има поле "First login flow", където се избира текущо създадения eauth-login-flow
+Така след препращане от eAuth към keycloak-a, се отваря страницата за аутентикиране на потребител, след което eAuth login-a се връзва към конкретен потребител в keycloak-a <img src="doc/9.user-authentication.png">
