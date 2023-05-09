@@ -39,7 +39,7 @@ public class EauthUsernameByEmailAttributeMapper extends EauthBaseAttributeMappe
             if (user != null) {
                 context.setUsername(user.getUsername());
             } else {
-                context.setUsername(email.split("@")[0]);
+                context.setUsername(email.replace("@", "."));
             }
         }
     }

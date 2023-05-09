@@ -13,8 +13,8 @@ import java.util.List;
  * Time: 15:28
  */
 public class EauthIdentifierAttributeMapper extends EauthBaseAttributeMapper {
-    private static final String IDENTIFIER_ATTRIBUTE = "personalId";
-    private static final String IDENTIFIER_TYPE_ATTRIBUTE = "personalIdType";
+    private static final String IDENTIFIER_ATTRIBUTE = "personal_id";
+    private static final String IDENTIFIER_TYPE_ATTRIBUTE = "personal_id_type";
 
     public EauthIdentifierAttributeMapper() {
         addAllButUserAttributeProperty();

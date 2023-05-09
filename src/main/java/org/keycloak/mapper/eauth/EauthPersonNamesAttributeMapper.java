@@ -15,7 +15,7 @@ import java.util.List;
 public class EauthPersonNamesAttributeMapper extends EauthBaseAttributeMapper {
 
     private static final String FIRST_NAME = "firstName";
-    private static final String SECOND_NAME = "secondName";
+    private static final String SECOND_NAME = "middle_name";
     private static final String LAST_NAME = "lastName";
 
     public EauthPersonNamesAttributeMapper() {
