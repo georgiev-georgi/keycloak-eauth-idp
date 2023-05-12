@@ -4,8 +4,6 @@ import org.keycloak.broker.provider.BrokeredIdentityContext;
 import org.keycloak.models.IdentityProviderMapperModel;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
-import org.keycloak.models.UserModel;
-import org.keycloak.models.utils.KeycloakModelUtils;
 
 import java.util.List;
 
@@ -35,12 +33,7 @@ public class EauthUsernameByEmailAttributeMapper extends EauthBaseAttributeMappe
         List<String> attributeValuesInContext = findAttributeValuesInContext(attributeName, context);
         if (!attributeValuesInContext.isEmpty()) {
             String email = attributeValuesInContext.get(0);
-            UserModel user = KeycloakModelUtils.findUserByNameOrEmail(session, realm, email);
-            if (user != null) {
-                context.setUsername(user.getUsername());
-            } else {
-                context.setUsername(email.replace("@", "."));
-            }
+            context.setUsername(email);
         }
     }
 }

@@ -73,15 +73,15 @@ The extension uses SAML 2.0 identity provider-a за keycloak and adds additiona
    - Attribute Name - urn:egov:bg:eauth:2.0:attributes:email
    - Name Format - ATTRIBUTE_FORMAT_URI
    - User Attribute Name - email
- - Username Attribute Mapper - maps the username. If an user with the given name exists in the database, it's username is set to the field. If the user does not exist, the chars before @ are used as username <img src="doc/username-attribute-mapper.png">
+ - Username Attribute Mapper - maps the username. Sets the attribute with the given name as username attribute <img src="doc/username-attribute-mapper.png">
    - Mapper Type - Eauth Read Username By Email Mapper
    - Attribute Name - urn:egov:bg:eauth:2.0:attributes:email
    - Name Format - ATTRIBUTE_FORMAT_URI
- - Person Identifier Mapper - reads the personIdentifier and if starts with PNOBG-, maps it to 2 attributes - personIdentifierType=NATIONAL_ID and personIdentifier=the chars after PNOBG- <img src="doc/person-identifier-mapper.png">
+ - Person Identifier Mapper - reads the personIdentifier and if starts with PNOBG-, maps it to 2 attributes - personal_id_type=NATIONAL_ID and personal_id=the chars after PNOBG- <img src="doc/person-identifier-mapper.png">
    - Mapper Type - Eauth Person Identifier And  Type Mapper
    - Attribute Name - urn:egov:bg:eauth:2.0:attributes:personIdentifier
    - Name Format - ATTRIBUTE_FORMAT_URI
- - Person Names Mapper - Reads the attribute urn:egov:bg:eauth:2.0:attributes:personName if has two spaces, it separated to 3 parts, each of them is set to firstName / secondName / lastName user attributes. Otherwise set the whole personName like firstName. <img src="doc/person-names-mapper.png">
+ - Person Names Mapper - Reads the attribute urn:egov:bg:eauth:2.0:attributes:personName if has two spaces, it separated to 3 parts, each of them is set to firstName / middle_name / lastName user attributes. Otherwise, set the whole personName like firstName. <img src="doc/person-names-mapper.png">
    - Mapper Type - Eauth Person Names Attributes Mapper
    - Attribute Name - urn:egov:bg:eauth:2.0:attributes:personName
    - Name Format - ATTRIBUTE_FORMAT_URI

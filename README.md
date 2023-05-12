@@ -74,15 +74,15 @@
    - Attribute Name - urn:egov:bg:eauth:2.0:attributes:email
    - Name Format - ATTRIBUTE_FORMAT_URI
    - User Attribute Name - email
- - Username Attribute Mapper - map-ва username атрибута. Ако съществува потребител с дадения мейл в базата, му взема името и го слага в username атрибута. Ако го няма, слага това преди @ като име на потребителя <img src="doc/username-attribute-mapper.png">
+ - Username Attribute Mapper - map-ва username атрибута. Слага дадения атрибут (в общия случай мейла като username) <img src="doc/username-attribute-mapper.png">
    - Mapper Type - Eauth Read Username By Email Mapper
    - Attribute Name - urn:egov:bg:eauth:2.0:attributes:email
    - Name Format - ATTRIBUTE_FORMAT_URI
- - Person Identifier Mapper - Прочита personIdentifier и ако започва с PNOBG- го map-ва към 2 атрибута personIdentifierType=NATIONAL_ID + personIdentifier=това след PNOBG- <img src="doc/person-identifier-mapper.png">
+ - Person Identifier Mapper - Прочита personIdentifier и ако започва с PNOBG- го map-ва към 2 атрибута personal_id_type=NATIONAL_ID + personal_id=това след PNOBG- <img src="doc/person-identifier-mapper.png">
    - Mapper Type - Eauth Person Identifier And  Type Mapper
    - Attribute Name - urn:egov:bg:eauth:2.0:attributes:personIdentifier
    - Name Format - ATTRIBUTE_FORMAT_URI
- - Person Names Mapper - Прочита атрибута urn:egov:bg:eauth:2.0:attributes:personName и ако е сътавен от 3 части, слага всяка една част в атрибуте firstName, secondName, lastName на user-a. Ако не може да го раздели на 3 части, слага всичко в personName. <img src="doc/person-names-mapper.png">
+ - Person Names Mapper - Прочита атрибута urn:egov:bg:eauth:2.0:attributes:personName и ако е сътавен от 3 части, слага всяка една част в атрибуте firstName, middle_name, lastName на user-a. Ако не може да го раздели на 3 части, слага всичко в personName. <img src="doc/person-names-mapper.png">
    - Mapper Type - Eauth Person Names Attributes Mapper
    - Attribute Name - urn:egov:bg:eauth:2.0:attributes:personName
    - Name Format - ATTRIBUTE_FORMAT_URI
