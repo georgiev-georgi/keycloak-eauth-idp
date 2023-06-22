@@ -18,15 +18,15 @@
  - извиква се mvn clean install, което генерира keycloak-eauth-saml-idp.jar file, който се намира в target директорията
  - jar file-a се копира в providers директорията на keycloak
  - извиква се kc build от bin директорията на keycloak
-#### keycloak-ui
+#### keycloak-admin-ui
 1. build от sources или използване на съществуващия jar от директорията /jar
    - build на сорсовете
-     - клониране на github repo -> https://github.com/georgiev-georgi/keycloak-ui
-     - checkout на branch 21.0.0
-     - влизане в директорията keycloak-theme
-     - mvn clean install, което създава keycloak-admin-ui-21.0.0.jar в target директорията
-     - jar-a се преименува на org.keycloak.keycloak-admin-ui-21.0.0.jar
-   - използване на файла org.keycloak.keycloak-admin-ui-21.0.0.jar от /jar директорията
+     - клониране на gitlab repo -> https://gitlab.com/duosoftbg/keycloak.git
+     - checkout на branch 21.1.1
+     - влизане в директорията js
+     - mvn clean install, което създава keycloak-admin-ui-21.1.1.jar в apps\admin-ui\target директорията
+     - jar-a се преименува на org.keycloak.keycloak-admin-ui-21.1.1.jar
+   - използване на файла org.keycloak.keycloak-admin-ui-21.1.1.jar от /jar директорията
 2. jar file-a се прехвърля в lib/lib/main директорията на keycloak, в която трябва да съществува същия файл, който се replace-ва 
 3. стартиране на сървъра
 
